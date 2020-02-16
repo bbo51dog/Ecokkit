@@ -5,9 +5,9 @@ import net.bbo51dog.ecokkit.repository.RepositoryProvider
 
 class EcokkitPlugin : PluginBase() {
 
-    private lateinit var RepositoryProvider: provider
+    private lateinit var provider: RepositoryProvider
 
-    override fun onEnable(){
+    override fun onEnable() {
         val folder = this.getDataFolder()
         folder.mkdir()
         this.provider = RepositoryProvider(folder.absolutePath + "/ecokkit.db ")
