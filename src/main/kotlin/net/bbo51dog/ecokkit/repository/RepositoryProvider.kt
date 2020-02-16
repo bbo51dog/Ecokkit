@@ -16,4 +16,12 @@ class RepositoryProvider(path: String) {
             MainLogger.getLogger().logException(exception)
         }
     }
+    
+    public fun close() {
+        this.connection.close()
+    }
+    
+    public fun createUserRepository(): UserRepository {
+        return SQLiteUserRepository(this.connection)
+    }
 }
