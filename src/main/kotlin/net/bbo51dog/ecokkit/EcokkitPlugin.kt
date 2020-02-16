@@ -3,7 +3,7 @@ package net.bbo51dog.ecokkit
 import cn.nukkit.plugin.PluginBase
 import net.bbo51dog.ecokkit.api.EcokkitAPI
 import net.bbo51dog.ecokkit.repository.RepositoryProvider
-net.bbo51dog.ecokkit.repository.UserRepository
+import net.bbo51dog.ecokkit.repository.UserRepository
 
 class EcokkitPlugin : PluginBase() {
 
