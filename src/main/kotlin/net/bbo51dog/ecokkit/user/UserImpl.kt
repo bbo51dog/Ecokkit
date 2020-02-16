@@ -1,5 +1,5 @@
 package net.bbo51dog.entity
 
-class UserImpl: User{
+class UserImpl : User{
 
 }
