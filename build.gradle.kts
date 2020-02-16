@@ -10,7 +10,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven {
-        url "https://repo.nukkitx.com/snapshot/"
+        url = uri("https://repo.nukkitx.com/snapshot/")
     }
 }
 
@@ -38,7 +38,7 @@ tasks {
 }
 
 nukkit {
-    main = "net.bbo51dog.EcokkitPlugin"
+    main = "net.bbo51dog.ecokkit.EcokkitPlugin"
     api = listOf("1.0.0")
     authors = listOf("bbo51dog")
 }
