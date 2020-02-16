@@ -1,5 +1,5 @@
 package net.bbo51dog.ecokkit.repository
 
-interface UserRepository : Repository {
+trait UserRepository : Repository {
 
 }
