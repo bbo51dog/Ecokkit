@@ -1,6 +1,8 @@
 package net.bbo51dog.ecokkit.user
 
-class UserImpl(name: String, money: Int) : User {
+class UserImpl(xuid: String, name: String, money: Int) : User {
+
+    private val xuid: String = xuid
 
     private val name: String = name.toLowerCase()
 
