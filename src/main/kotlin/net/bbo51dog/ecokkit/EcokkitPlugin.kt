@@ -12,9 +12,8 @@ class EcokkitPlugin : PluginBase() {
     private lateinit var repo: UserRepository
 
     override fun onLoad() {
-        val folder = this.getDataFolder()
-        folder.mkdir()
-        this.provider = RepositoryProvider(folder.absolutePath + "/ecokkit.db")
+        dataFolder.mkdir()
+        this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
         this.repo = this.provider.createUserRepository()
         EcokkitAPI.init(this.repo)
     }
