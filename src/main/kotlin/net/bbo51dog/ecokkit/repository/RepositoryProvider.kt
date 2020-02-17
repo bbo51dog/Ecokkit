@@ -10,7 +10,7 @@ class RepositoryProvider(path: String) {
 
     init {
         Class.forName("org.sqlite.JDBC")
-		this.connection = DriverManager.getConnection("jdbc:sqlite:" + path)
+        this.connection = DriverManager.getConnection("jdbc:sqlite:" + path)
     }
     
     public fun close() {
