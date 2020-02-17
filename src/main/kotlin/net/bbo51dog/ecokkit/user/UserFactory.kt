@@ -1,8 +1,8 @@
-package net.bbo51dog.eckkit.user
+package net.bbo51dog.ecokkit.user
 
 object UserFactory {
     
     public fun createUser(name: String, money: Int): User{
-        return UserImpl(name money)
+        return UserImpl(name, money)
     }
 }
