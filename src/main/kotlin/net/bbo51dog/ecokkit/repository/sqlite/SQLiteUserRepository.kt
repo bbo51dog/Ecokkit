@@ -6,4 +6,9 @@ import net.bbo51dog.ecokkit.repository.UserRepository
 class SQLiteUserRepository(connection: Connection) : UserRepository {
 
     private val connection: Connection = connection
+
+    init {
+        val stmt = connection.createStatement()
+        stmt.executeUpdte("CREATE TABLE IF NOT EXISTS user (name TEXT NOT NULL, money TEXT NOT NULL)")
+    }
 }
