@@ -8,7 +8,11 @@ interface UserRepository : Repository {
 
     fun getUser(xuid: String): User
 
+    fun getUserByName(name: String): User
+
     fun updateUser(user: User)
 
     fun existsUserId(xuid: String): Boolean
+
+    fun existsUserName(name: String): Boolean
 }

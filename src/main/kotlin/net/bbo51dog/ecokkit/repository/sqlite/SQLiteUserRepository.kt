@@ -34,6 +34,16 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
         return UserFactory.createUser(xuid, name, money)
     }
 
+    override fun getUserByName(name: String): User {
+        require(this.existsUserName(name), {"User not found"})
+        val stmt = this.connection.prepareStatement("SELECT xuid, money FROM user WHERE name = ?")
+        stmt.setString(1, name)
+        val result = stmt.executeQuery()
+        val xuid = result.getString("xuid")
+        val money = result.getInt("money")
+        return UserFactory.createUser(xuid, name, money)
+    }
+
     override fun updateUser(user: User) {
         val xuid = user.xuid
         require(this.existsUserId(xuid), {"User not found"})
@@ -47,6 +57,13 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
     override fun existsUserId(xuid: String): Boolean {
         val stmt = this.connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE xuid = ?")
         stmt.setString(1, xuid)
+        val result = stmt.executeQuery()
+        return result.getInt("count") == 1
+    }
+
+    override fun existsUserName(name: String): Boolean {
+        val stmt = this.connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE name = ?")
+        stmt.setString(1, name)
         val result = stmt.executeQuery()
         return result.getInt("count") == 1
     }
