@@ -1,6 +1,7 @@
 package net.bbo51dog.ecokkit
 
 import cn.nukkit.utils.Config
+import cn.nukkit.utils.ConfigSection
 import cn.nukkit.plugin.PluginBase
 import net.bbo51dog.ecokkit.api.EcokkitAPI
 import net.bbo51dog.ecokkit.repository.RepositoryProvider
@@ -14,13 +15,20 @@ class EcokkitPlugin : PluginBase() {
 
     override fun onLoad() {
         dataFolder.mkdir()
-        Config(dataFolder.absolutePath + "Cofig.yml", )
-        this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db", Config.YAML)
+        val config = this.loadConfig()
+        this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
         this.repo = this.provider.createUserRepository()
-        EcokkitAPI.init(this.repo)
+        EcokkitAPI.init(this.repo, config.get("unit"), config.get("default_money"))
     }
     
     override fun onDisable() {
         this.provider.close()
+    }
+    
+    private fun loadConfig(): Config {
+        val map = linkedMapOf()
+        map.put("default_money", 5000)
+        map.put("unit", "${$}")
+        return Config(dataFolder.absolutePath + "Cofig.yml", Config.YAML, ConfigSection(map))
     }
 }
