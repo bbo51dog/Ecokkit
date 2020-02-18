@@ -7,12 +7,14 @@ object EcokkitAPI : IEcokkitAPI {
 
     private lateinit var repo: UserRepository
 
-    override val unit: String
+    private val unit: String
     
-    override val default: Int
+    private val default: Int
 
-    fun init(repo: UserRepository) {
+    fun init(repo: UserRepository, unit: String, default: Int) {
         this.repo = repo
+        this.repo = unit
+        this.default = default
     }
 
     override fun getMoney(xuid: String): Int {

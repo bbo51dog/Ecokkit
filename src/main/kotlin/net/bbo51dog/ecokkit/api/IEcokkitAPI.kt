@@ -2,10 +2,6 @@ package net.bbo51dog.ecokkit.api
 
 interface IEcokkitAPI {
 
-    val unit: String
-
-    val default: Int
-
     fun getMoney(xuid: String): Int
 
     fun setMoney(xuid: String, money: Int)
