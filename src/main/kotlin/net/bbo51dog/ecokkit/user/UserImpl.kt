@@ -2,9 +2,9 @@ package net.bbo51dog.ecokkit.user
 
 class UserImpl(xuid: String, name: String, money: Int) : User {
 
-    private val xuid: String = xuid
+    protected val xuid: String = xuid
 
-    private val name: String = name.toLowerCase()
+    protected val name: String = name.toLowerCase()
 
-    private val money: Int = money
+    protected var money: Int = money
 }

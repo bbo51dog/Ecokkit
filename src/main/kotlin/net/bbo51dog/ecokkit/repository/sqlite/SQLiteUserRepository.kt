@@ -9,6 +9,6 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
 
     init {
         val stmt = connection.createStatement()
-        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS user (name TEXT NOT NULL, money TEXT NOT NULL)")
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS user (xuid TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, money TEXT NOT NULL)")
     }
 }
