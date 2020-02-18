@@ -1,5 +1,6 @@
 package net.bbo51dog.ecokkit
 
+import cn.nukkit.utils.Config
 import cn.nukkit.plugin.PluginBase
 import net.bbo51dog.ecokkit.api.EcokkitAPI
 import net.bbo51dog.ecokkit.repository.RepositoryProvider
@@ -13,7 +14,8 @@ class EcokkitPlugin : PluginBase() {
 
     override fun onLoad() {
         dataFolder.mkdir()
-        this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
+        Config(dataFolder.absolutePath + "Cofig.yml", )
+        this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db", Config.YAML)
         this.repo = this.provider.createUserRepository()
         EcokkitAPI.init(this.repo)
     }
