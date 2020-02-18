@@ -6,9 +6,9 @@ interface UserRepository : Repository {
 
     fun registerUser(user: User)
 
-    fun getUser(xuid: String)
+    fun getUser(xuid: String): User
 
     fun updateUser(user: User)
 
-    fun existsUserId(xuid: String)
+    fun existsUserId(xuid: String): Boolean
 }
