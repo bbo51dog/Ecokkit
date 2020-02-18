@@ -5,7 +5,7 @@ import net.bbo51dog.ecokkit.user.UserFactory
 
 object EcokkitAPI : IEcokkitAPI {
 
-    private lateinit var repo: UserRepository
+    private val repo: UserRepository
 
     private val unit: String
     

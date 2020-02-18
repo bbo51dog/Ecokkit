@@ -7,9 +7,9 @@ import net.bbo51dog.ecokkit.repository.UserRepository
 
 class EcokkitPlugin : PluginBase() {
 
-    private lateinit var provider: RepositoryProvider
+    private val provider: RepositoryProvider
     
-    private lateinit var repo: UserRepository
+    private val repo: UserRepository
 
     override fun onLoad() {
         dataFolder.mkdir()
