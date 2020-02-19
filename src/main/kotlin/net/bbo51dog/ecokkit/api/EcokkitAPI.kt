@@ -3,7 +3,7 @@ package net.bbo51dog.ecokkit.api
 import net.bbo51dog.ecokkit.repository.UserRepository
 import net.bbo51dog.ecokkit.user.UserFactory
 
-class EcokkitAPI private constructer(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
+class EcokkitAPI private constructor(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
 
     private val repo: UserRepository = repo
 
@@ -19,7 +19,7 @@ class EcokkitAPI private constructer(repo: UserRepository, unit: String, default
 
         @JvmStatic
         fun createInstance(repo: UserRepository, unit: String, default: Int) {
-            this.instance = PlaceholderAPIIml(repo, unit, default)
+            this.instance = EcokkitAPI(repo, unit, default)
         }
     }
 
