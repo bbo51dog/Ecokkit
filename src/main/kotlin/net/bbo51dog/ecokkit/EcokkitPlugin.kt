@@ -20,7 +20,7 @@ class EcokkitPlugin : PluginBase() {
         val config = this.loadConfig()
         this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
         this.repo = this.provider.createUserRepository()
-        this.api = EcokkitAPI(this.repo, config.getString("unit"), config.getInt("default_money"))
+        this.api = EcokkitAPI.createInstance(this.repo, config.getString("unit"), config.getInt("default_money"))
     }
     
     override fun onDisable() {

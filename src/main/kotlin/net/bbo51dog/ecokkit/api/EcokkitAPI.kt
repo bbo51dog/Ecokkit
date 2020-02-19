@@ -3,13 +3,25 @@ package net.bbo51dog.ecokkit.api
 import net.bbo51dog.ecokkit.repository.UserRepository
 import net.bbo51dog.ecokkit.user.UserFactory
 
-class EcokkitAPI(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
+class EcokkitAPI private constructer(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
 
     private val repo: UserRepository = repo
 
     private val unit: String = unit
     
     private val default: Int = default
+    
+    companion object {
+
+        @JvmStatic
+        lateinit var instance: EcokkitAPI
+            private set
+
+        @JvmStatic
+        fun createInstance(repo: UserRepository, unit: String, default: Int) {
+            this.instance = PlaceholderAPIIml(repo, unit, default)
+        }
+    }
 
     override fun getMoney(xuid: String): Int {
         return this.repo.getUser(xuid).money
