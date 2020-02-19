@@ -12,7 +12,7 @@ interface IEcokkitAPI {
 
     fun getMoneyByName(name: String): Int
 
-    fun setMoneyByName(name: String, money, Int)
+    fun setMoneyByName(name: String, money: Int)
 
     fun addMoneyByName(name: String, money: Int)
 

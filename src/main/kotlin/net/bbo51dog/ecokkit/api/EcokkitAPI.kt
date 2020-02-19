@@ -3,19 +3,13 @@ package net.bbo51dog.ecokkit.api
 import net.bbo51dog.ecokkit.repository.UserRepository
 import net.bbo51dog.ecokkit.user.UserFactory
 
-object EcokkitAPI : IEcokkitAPI {
+class EcokkitAPI(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
 
-    private val repo: UserRepository
+    private val repo: UserRepository = repo
 
-    private val unit: String
+    private val unit: String = unit
     
-    private val default: Int
-
-    fun init(repo: UserRepository, unit: String, default: Int) {
-        this.repo = repo
-        this.repo = unit
-        this.default = default
-    }
+    private val default: Int = default
 
     override fun getMoney(xuid: String): Int {
         return this.repo.getUser(xuid).money
@@ -39,8 +33,8 @@ object EcokkitAPI : IEcokkitAPI {
         user.money = new
     }
 
-    override fun getMoney(xuid: String): Int {
-        return this.repo.getUser(xuid).money
+    override fun getMoneyByName(name: String): Int {
+        return this.repo.getUser(name).money
     }
 
     override fun setMoneyByName(name: String, money: Int) {

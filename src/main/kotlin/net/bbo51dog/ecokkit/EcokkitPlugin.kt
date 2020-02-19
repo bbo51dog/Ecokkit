@@ -9,16 +9,18 @@ import net.bbo51dog.ecokkit.repository.UserRepository
 
 class EcokkitPlugin : PluginBase() {
 
-    private val provider: RepositoryProvider
+    private lateinit var provider: RepositoryProvider
     
-    private val repo: UserRepository
+    private lateinit var repo: UserRepository
+
+    private lateinit var api: EcokkitAPI
 
     override fun onLoad() {
         dataFolder.mkdir()
         val config = this.loadConfig()
         this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
         this.repo = this.provider.createUserRepository()
-        EcokkitAPI.init(this.repo, config.get("unit"), config.get("default_money"))
+        this.api = EcokkitAPI(this.repo, config.getString("unit"), config.getInt("default_money"))
     }
     
     override fun onDisable() {
@@ -26,9 +28,9 @@ class EcokkitPlugin : PluginBase() {
     }
     
     private fun loadConfig(): Config {
-        val map = linkedMapOf()
-        map.put("default_money", 5000)
-        map.put("unit", "${$}")
-        return Config(dataFolder.absolutePath + "Cofig.yml", Config.YAML, ConfigSection(map))
+        val section = ConfigSection()
+        section.set("default_money", 5000)
+        section.set("unit", "\$")
+        return Config(dataFolder.absolutePath + "Cofig.yml", Config.YAML, section)
     }
 }
