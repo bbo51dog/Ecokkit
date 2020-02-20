@@ -43,7 +43,7 @@ class EcokkitPlugin : PluginBase() {
     
     private fun loadLanguage(): Language {
         val section = ConfigSection(linkedMapOf<String, Any>(
-        
+            "prefix" to "§l§a[§6Ecokkit§a]§r "
         ))
         val config = Config(dataFolder.absolutePath + "Language.ini", Config.PROPERTIES, section)
         return Language(config.getAll())
