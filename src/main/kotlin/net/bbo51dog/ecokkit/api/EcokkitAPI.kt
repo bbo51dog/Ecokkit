@@ -40,6 +40,7 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             return
         }
         user.money = money
+        this.repo.updateUser(user)
     }
 
     override fun addMoney(xuid: String, money: Int) {
@@ -51,6 +52,7 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             return
         }
         user.money += money
+        this.repo.updateUser(user)
     }
 
     override fun reduceMoney(xuid: String, money: Int) {
@@ -64,6 +66,7 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             return
         }
         user.money = new
+        this.repo.updateUser(user)
     }
     
     override fun exists(xuid: String): Boolean {
@@ -83,6 +86,7 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             return
         }
         user.money = money
+        this.repo.updateUser(user)
     }
 
     override fun addMoneyByName(name: String, money: Int) {
@@ -94,6 +98,7 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             return
         }
         user.money += money
+        this.repo.updateUser(user)
     }
 
     override fun reduceMoneyByName(name: String, money: Int) {
@@ -107,6 +112,7 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             return
         }
         user.money = new
+        this.repo.updateUser(user)
     }
     
     override fun existsByName(name: String): Boolean {
