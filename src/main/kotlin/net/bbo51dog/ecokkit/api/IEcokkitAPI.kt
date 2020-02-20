@@ -1,8 +1,12 @@
 package net.bbo51dog.ecokkit.api
 
+import net.bbo51dog.ecokkit.utils.Language
+
 interface IEcokkitAPI {
 
     val unit: String 
+    
+    val language: Language
 
     fun getMoney(xuid: String): Int
 

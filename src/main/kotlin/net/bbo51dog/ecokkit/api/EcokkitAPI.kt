@@ -5,15 +5,18 @@ import net.bbo51dog.ecokkit.event.EcokkitAddMoneyEvent
 import net.bbo51dog.ecokkit.event.EcokkitReduceMoneyEvent
 import net.bbo51dog.ecokkit.event.EcokkitSetMoneyEvent
 import net.bbo51dog.ecokkit.repository.UserRepository
+import net.bbo51dog.ecokkit.utils.Language
 import net.bbo51dog.ecokkit.user.UserFactory
 
-class EcokkitAPI private constructor(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
+class EcokkitAPI private constructor(repo: UserRepository, lang: Language, unit: String, default: Int) : IEcokkitAPI {
 
     private val repo: UserRepository = repo
     
     private val default: Int = default
     
     override val unit: String = unit
+    
+    override val language: Language = lang
     
     companion object {
 
@@ -22,8 +25,8 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
             private set
 
         @JvmStatic
-        fun createInstance(repo: UserRepository, unit: String, default: Int) {
-            this.instance = EcokkitAPI(repo, unit, default)
+        fun createInstance(repo: UserRepository, lang: Language, unit: String, default: Int) {
+            this.instance = EcokkitAPI(repo, lang, unit, default)
         }
     }
 
