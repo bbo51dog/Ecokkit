@@ -6,10 +6,10 @@ import net.bbo51dog.ecokkit.user.UserFactory
 class EcokkitAPI private constructor(repo: UserRepository, unit: String, default: Int) : IEcokkitAPI {
 
     private val repo: UserRepository = repo
-
-    private val unit: String = unit
     
     private val default: Int = default
+    
+    override val unit: String = unit
     
     companion object {
 
