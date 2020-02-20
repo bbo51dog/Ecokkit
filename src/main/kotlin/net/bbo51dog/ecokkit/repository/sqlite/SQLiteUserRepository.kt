@@ -67,4 +67,19 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
         val result = stmt.executeQuery()
         return result.getInt("count") == 1
     }
+    
+    override fun getAllData(): MutableMap<String, Map<String, Any>> {
+        val stmt = connection.createStatement()
+        val result = stmt.executeQuery("SELECT * FROM user")
+        val map = mutableMapOf<String, Map<String, Any>>()
+        while(result.next()) {
+            var xuid = result.getString("xuid")
+            var data = mapOf<String, Any>(
+                "name" to result.getString("name"),
+                "money" to result.getInt("money")
+            )
+            map.put(xuid, data)
+        }
+        return map
+    }
 }

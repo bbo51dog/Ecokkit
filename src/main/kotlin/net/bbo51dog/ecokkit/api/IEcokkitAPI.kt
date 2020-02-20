@@ -21,4 +21,6 @@ interface IEcokkitAPI {
     fun reduceMoneyByName(name: String, money: Int)
 
     fun createMoneyData(xuid: String, name: String)
+    
+    fun getAll(): MutableMap<String, Map<String, Any>>
 }

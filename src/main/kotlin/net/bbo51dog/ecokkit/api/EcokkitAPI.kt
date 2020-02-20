@@ -71,4 +71,8 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
         val user = UserFactory.createUser(xuid, name, this.default)
         this.repo.registerUser(user)
     }
+    
+    override fun getAll(): MutableMap<String, Map<String, Any>> {
+        return this.repo.getAllData()
+    }
 }

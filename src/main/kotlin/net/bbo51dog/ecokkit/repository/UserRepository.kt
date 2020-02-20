@@ -15,4 +15,6 @@ interface UserRepository : Repository {
     fun existsUserId(xuid: String): Boolean
 
     fun existsUserName(name: String): Boolean
+    
+    fun getAllData(): MutableMap<String, Map<String, Any>>
 }
