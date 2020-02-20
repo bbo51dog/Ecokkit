@@ -26,7 +26,9 @@ class EcokkitAPI private constructor(repo: UserRepository, lang: Language, unit:
 
         @JvmStatic
         fun createInstance(repo: UserRepository, lang: Language, unit: String, default: Int) {
-            this.instance = EcokkitAPI(repo, lang, unit, default)
+            if (!::instance.isInitialized) {
+                this.instance = EcokkitAPI(repo, lang, unit, default)
+            }
         }
     }
 
