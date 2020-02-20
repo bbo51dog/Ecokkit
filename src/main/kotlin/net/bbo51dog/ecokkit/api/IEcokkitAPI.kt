@@ -11,6 +11,8 @@ interface IEcokkitAPI {
     fun addMoney(xuid: String, money: Int)
 
     fun reduceMoney(xuid: String, money: Int)
+    
+    fun exists(xuid: String): Boolean
 
     fun getMoneyByName(name: String): Int
 
@@ -19,6 +21,8 @@ interface IEcokkitAPI {
     fun addMoneyByName(name: String, money: Int)
 
     fun reduceMoneyByName(name: String, money: Int)
+    
+    fun existsByName(name: String): Boolean
 
     fun createMoneyData(xuid: String, name: String)
     

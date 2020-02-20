@@ -44,6 +44,10 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
         require(new > 0, {"Money is too little"})
         user.money = new
     }
+    
+    override fun exists(xuid: String): Boolean {
+        return this.repo.existsUserId(xuid)
+    }
 
     override fun getMoneyByName(name: String): Int {
         return this.repo.getUser(name).money
@@ -65,6 +69,10 @@ class EcokkitAPI private constructor(repo: UserRepository, unit: String, default
         val new = user.money + money
         require(new > 0, {"Money is too little"})
         user.money = new
+    }
+    
+    override fun existsByName(name: String): Boolean {
+        return this.repo.existsUserName(name)
     }
 
     override fun createMoneyData(xuid: String, name: String) {

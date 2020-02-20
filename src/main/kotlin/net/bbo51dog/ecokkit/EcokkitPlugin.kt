@@ -4,6 +4,7 @@ import cn.nukkit.utils.Config
 import cn.nukkit.utils.ConfigSection
 import cn.nukkit.plugin.PluginBase
 import net.bbo51dog.ecokkit.api.EcokkitAPI
+import net.bbo51dog.ecokkit.event.listener.EventListener
 import net.bbo51dog.ecokkit.repository.RepositoryProvider
 import net.bbo51dog.ecokkit.repository.UserRepository
 
@@ -21,6 +22,10 @@ class EcokkitPlugin : PluginBase() {
         this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
         this.repo = this.provider.createUserRepository()
         EcokkitAPI.createInstance(this.repo, config.getString("unit"), config.getInt("default_money"))
+    }
+    
+    override fun onEnable() {
+        this.server.pluginManager.registerEvents(EventListener(), this)
     }
     
     override fun onDisable() {
