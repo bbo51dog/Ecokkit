@@ -45,7 +45,8 @@ class EcokkitPlugin : PluginBase() {
     
     private fun loadLanguage(): Language {
         val section = ConfigSection(linkedMapOf<String, Any>(
-            "prefix" to "§l§a[§6Ecokkit§a]§r "
+            "prefix" to "§l§a[§6Ecokkit§a]§r ",
+            "sender.not.player" to "§cゲーム内で実行してください"
         ))
         val config = Config(dataFolder.absolutePath + "/Language.ini", Config.PROPERTIES, section)
         return Language(config.all)
