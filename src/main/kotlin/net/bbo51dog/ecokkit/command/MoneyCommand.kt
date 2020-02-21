@@ -51,8 +51,7 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
     }
     
     private fun mine(sender: Player, args: Array<out String>): Boolean {
-        val message = this.lang.getMessage("command.see")
-        message.replace("%player", sender.name)
+        val message = this.lang.getMessage("command.mine")
         message.replace("%unit", this.api.unit)
         message.replace("%money", this.api.getMoneyByName(sender.name).toString())
         sender.sendMessage(message)

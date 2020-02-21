@@ -48,6 +48,7 @@ class EcokkitPlugin : PluginBase() {
             "prefix" to "§l§a[§6Ecokkit§a]§r ",
             "sender.not.player" to "§cゲーム内で実行してください",
             "player.not.found" to "プレイヤー｢%player｣が見つかりませんでした",
+            "command.mine" to "あなたの所持金 §e>> §r%unit%money",
             "command.see" to "%playerの所持金 §e>> §r%unit%money"
         ))
         val config = Config(dataFolder.absolutePath + "/Language.ini", Config.PROPERTIES, section)
