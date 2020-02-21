@@ -38,14 +38,14 @@ class EcokkitPlugin : PluginBase() {
         val section = ConfigSection()
         section.set("default_money", 5000)
         section.set("unit", "\$")
-        return Config(dataFolder.absolutePath + "Cofig.yml", Config.YAML, section)
+        return Config(dataFolder.absolutePath + "/Cofig.yml", Config.YAML, section)
     }
     
     private fun loadLanguage(): Language {
         val section = ConfigSection(linkedMapOf<String, Any>(
             "prefix" to "§l§a[§6Ecokkit§a]§r "
         ))
-        val config = Config(dataFolder.absolutePath + "Language.ini", Config.PROPERTIES, section)
-        return Language(config.getAll())
+        val config = Config(dataFolder.absolutePath + "/Language.ini", Config.PROPERTIES, section)
+        return Language(config.all)
     }
 }
