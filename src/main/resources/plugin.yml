@@ -5,3 +5,9 @@ api: ["1.0.9"]
 author: bbo51dog
 description: Economy plugin for Nukkit
 website: https://github.com/bbo51dog/Ecokkit
+permissions:
+  ecokkit.command:
+    children:
+        children:
+          ecokkit.command.money:
+            default: true
