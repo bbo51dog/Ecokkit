@@ -4,6 +4,7 @@ import cn.nukkit.utils.Config
 import cn.nukkit.utils.ConfigSection
 import cn.nukkit.plugin.PluginBase
 import net.bbo51dog.ecokkit.api.EcokkitAPI
+import net.bbo51dog.ecokkit.command.MoneyCommand
 import net.bbo51dog.ecokkit.event.listener.EventListener
 import net.bbo51dog.ecokkit.repository.RepositoryProvider
 import net.bbo51dog.ecokkit.repository.UserRepository
@@ -27,6 +28,7 @@ class EcokkitPlugin : PluginBase() {
     }
     
     override fun onEnable() {
+        this.registerCommand()
         this.server.pluginManager.registerEvents(EventListener(), this)
     }
     
@@ -47,5 +49,9 @@ class EcokkitPlugin : PluginBase() {
         ))
         val config = Config(dataFolder.absolutePath + "/Language.ini", Config.PROPERTIES, section)
         return Language(config.all)
+    }
+
+    private fun registerCommand() {
+        this.server.commandMap.register("money", MoneyCommand())
     }
 }
