@@ -38,7 +38,7 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
         }
         when (args[0]) {
             "mine" -> {
-                return this.mine(sender, args)
+                return this.mine(sender)
             }
             "see" -> {
                 return this.see(sender, args)
@@ -50,7 +50,7 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
         }
     }
     
-    private fun mine(sender: Player, args: Array<out String>): Boolean {
+    private fun mine(sender: Player): Boolean {
         val message = this.lang.getMessage("command.mine")
         message.replace("%unit", this.api.unit)
         message.replace("%money", this.api.getMoneyByName(sender.name).toString())
