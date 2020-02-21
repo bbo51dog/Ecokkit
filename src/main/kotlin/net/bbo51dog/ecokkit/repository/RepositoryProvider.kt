@@ -6,10 +6,11 @@ import net.bbo51dog.ecokkit.repository.sqlite.SQLiteUserRepository
 
 class RepositoryProvider(path: String) {
 
-    private val connection: Connection = DriverManager.getConnection("jdbc:sqlite:" + path)
+    private lateinit var connection: Connection
 
     init {
         Class.forName("org.sqlite.JDBC")
+        this.connection = DriverManager.getConnection("jdbc:sqlite:" + path)
     }
     
     public fun close() {
