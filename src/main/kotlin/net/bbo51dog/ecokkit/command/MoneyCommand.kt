@@ -51,9 +51,9 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
     }
     
     private fun mine(sender: Player): Boolean {
-        val message = this.lang.getMessage("command.mine")
-        message.replace("%unit", this.api.unit)
-        message.replace("%money", this.api.getMoneyByName(sender.name).toString())
+        val search = listOf<String>("%unit", "%money")
+        val replace = listOf<String>(this.api.unit, this.api.getMoneyByName(sender.name).toString())
+        val message = this.lang.getReplaceMessage(search, replace, "command.mine")
         sender.sendMessage(message)
         return true
     }
@@ -64,15 +64,13 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
             return false
         }
         if (!this.api.existsByName(args[1])) {
-            val message = this.lang.getMessage("player.not.found")
-            message.replace("%player", sender.name)
+            val message = this.lang.getMessage("player.not.found").replace("%player", args[1])
             sender.sendMessage(message)
             return false
         }
-        val message = this.lang.getMessage("command.see")
-        message.replace("%player", args[1])
-        message.replace("%unit", this.api.unit)
-        message.replace("%money", this.api.getMoneyByName(args[1]).toString())
+        val search = listOf<String>("%player", "%unit", "%money")
+        val replace = listOf<String>(args[1], this.api.unit, this.api.getMoneyByName(args[1]).toString())
+        val message = this.lang.getReplaceMessage(search, replace, "command.see")
         sender.sendMessage(message)
         return true
     }

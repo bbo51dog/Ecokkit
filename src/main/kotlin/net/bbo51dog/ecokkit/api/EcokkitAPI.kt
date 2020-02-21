@@ -79,7 +79,7 @@ class EcokkitAPI private constructor(repo: UserRepository, lang: Language, unit:
     }
 
     override fun getMoneyByName(name: String): Int {
-        return this.repo.getUser(name).money
+        return this.repo.getUserByName(name).money
     }
 
     override fun setMoneyByName(name: String, money: Int) {

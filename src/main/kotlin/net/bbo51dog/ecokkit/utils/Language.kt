@@ -14,4 +14,12 @@ class Language(map: Map<String, Any>) {
         }
         return message.toString()
     }
+    
+    fun getReplaceMessage(search: List<String>, replace: List<String>, key: String, prefix: Boolean = true): String {
+        var message = this.getMessage(key, prefix)
+        for (i in 0..search.size - 1) {
+            message = message.replace(search[i], replace[i])
+        }
+        return message
+    }
 }
