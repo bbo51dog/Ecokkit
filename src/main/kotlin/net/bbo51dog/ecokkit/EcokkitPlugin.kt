@@ -50,7 +50,10 @@ class EcokkitPlugin : PluginBase() {
             "player.not.found" to "プレイヤー｢%player｣が見つかりませんでした",
             "command.usage" to "使い方: %usage",
             "command.mine" to "あなたの所持金 §e>> §r%unit%money",
-            "command.see" to "%playerの所持金 §e>> §r%unit%money"
+            "command.see" to "%playerの所持金 §e>> §r%unit%money",
+            "command.pay.lacking" to "所持金が不足しています",
+            "command.pay.success.sender" to "%playerに%unit%money支払いました",
+            "command.pay.success.target" to "%playerから%unit%money受け取りました"
         ))
         val config = Config(dataFolder.absolutePath + "/Language.ini", Config.PROPERTIES, section)
         return Language(config.all)
