@@ -71,9 +71,9 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
             return false
         }
         val message = this.lang.getMessage("command.see")
-        message.replace("%player", sender.name)
+        message.replace("%player", args[1])
         message.replace("%unit", this.api.unit)
-        message.replace("%money", this.api.getMoneyByName(sender.name).toString())
+        message.replace("%money", this.api.getMoneyByName(args[1]).toString())
         sender.sendMessage(message)
         return true
     }
