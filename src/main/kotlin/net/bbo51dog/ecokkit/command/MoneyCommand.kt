@@ -5,7 +5,7 @@ import cn.nukkit.command.Command
 import cn.nukkit.command.CommandSender
 import net.bbo51dog.ecokkit.api.EcokkitAPI
 
-class MoneyCommand : Command("money", "Ecokkit money command", "/money [see]") {
+class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | see]") {
 
     private val api: EcokkitAPI = EcokkitAPI.instance
     
@@ -37,6 +37,9 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [see]") {
             return false
         }
         when (args[0]) {
+            "mine" -> {
+                return this.mine(sender, args)
+            }
             "see" -> {
                 return this.see(sender, args)
             }
@@ -45,6 +48,15 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [see]") {
                 return false
             }
         }
+    }
+    
+    private fun mine(sender: Player, args: Array<out String>): Boolean {
+        val message = this.lang.getMessage("command.see")
+        message.replace("%player", sender.name)
+        message.replace("%unit", this.api.unit)
+        message.replace("%money", this.api.getMoneyByName(sender.name).toString())
+        sender.sendMessage(message)
+        return true
     }
     
     private fun see(sender: Player, args: Array<out String>): Boolean {
