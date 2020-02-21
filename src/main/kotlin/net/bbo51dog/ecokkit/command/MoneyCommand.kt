@@ -27,13 +27,14 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
         if (!this.api.exists(xuid)) {
             this.api.createMoneyData(xuid, sender.name)
         }
+        val usage = this.lang.getReplaceMessage(listOf("%usage"), listOf(this.usage), "command.usage")
         val size = args?.size
         if (size == null) {
-            sender.sendMessage(this.usage)
+            sender.sendMessage(usage)
             return false
         }
         if (size < 1) {
-            sender.sendMessage(this.usage)
+            sender.sendMessage(usage)
             return false
         }
         when (args[0]) {
@@ -44,7 +45,7 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
                 return this.see(sender, args)
             }
             else -> {
-                sender.sendMessage(this.usage)
+                sender.sendMessage(usage)
                 return false
             }
         }
@@ -60,7 +61,8 @@ class MoneyCommand : Command("money", "Ecokkit money command", "/money [mine | s
     
     private fun see(sender: Player, args: Array<out String>): Boolean {
         if (args.size < 2) {
-            sender.sendMessage("/money see <player>")
+            val usage = this.lang.getReplaceMessage(listOf("%usage"), listOf("/money see <player>"), "command.usage")
+            sender.sendMessage(usage)
             return false
         }
         if (!this.api.existsByName(args[1])) {
