@@ -11,3 +11,5 @@ permissions:
         children:
           ecokkit.command.money:
             default: true
+          ecokkit.command.op:
+            default: op
