@@ -21,20 +21,20 @@ class EcokkitPlugin : PluginBase() {
 
     override fun onLoad() {
         dataFolder.mkdir()
-        val config = this.loadConfig()
-        val lang = this.loadLanguage()
-        this.provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
-        this.repo = this.provider.createUserRepository()
-        EcokkitAPI.createInstance(this.repo, lang, config.getString("unit"), config.getInt("default_money"))
+        val config = loadConfig()
+        val lang = loadLanguage()
+        provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
+        repo = provider.createUserRepository()
+        EcokkitAPI.createInstance(repo, lang, config.getString("unit"), config.getInt("default_money"))
     }
     
     override fun onEnable() {
-        this.registerCommand()
-        this.server.pluginManager.registerEvents(EventListener(), this)
+        registerCommand()
+        server.pluginManager.registerEvents(EventListener(), this)
     }
     
     override fun onDisable() {
-        this.provider.close()
+        provider.close()
     }
     
     private fun loadConfig(): Config {
@@ -68,7 +68,7 @@ class EcokkitPlugin : PluginBase() {
     }
 
     private fun registerCommand() {
-        this.server.commandMap.register("money", MoneyCommand())
-        this.server.commandMap.register("opmoney", OpMoneyCommand())
+        server.commandMap.register("money", MoneyCommand())
+        server.commandMap.register("opmoney", OpMoneyCommand())
     }
 }

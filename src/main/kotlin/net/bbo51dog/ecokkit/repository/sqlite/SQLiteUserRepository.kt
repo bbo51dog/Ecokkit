@@ -16,8 +16,8 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
 
     override fun registerUser(user: User) {
         val xuid = user.xuid
-        require(!this.existsUserId(xuid), {"User is already registered"})
-        val stmt = this.connection.prepareStatement("INSERT INTO user (xuid, name, money) VALUES (?, ?, ?)")
+        require(!existsUserId(xuid), {"User is already registered"})
+        val stmt = connection.prepareStatement("INSERT INTO user (xuid, name, money) VALUES (?, ?, ?)")
         stmt.setString(1, xuid)
         stmt.setString(2, user.name)
         stmt.setInt(3, user.money)
@@ -25,8 +25,8 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
     }
 
     override fun getUser(xuid: String): User {
-        require(this.existsUserId(xuid), {"User not found"})
-        val stmt = this.connection.prepareStatement("SELECT name, money FROM user WHERE xuid = ?")
+        require(existsUserId(xuid), {"User not found"})
+        val stmt = connection.prepareStatement("SELECT name, money FROM user WHERE xuid = ?")
         stmt.setString(1, xuid)
         val result = stmt.executeQuery()
         val name = result.getString("name")
@@ -35,8 +35,8 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
     }
 
     override fun getUserByName(name: String): User {
-        require(this.existsUserName(name), {"User not found"})
-        val stmt = this.connection.prepareStatement("SELECT xuid, money FROM user WHERE name = ?")
+        require(existsUserName(name), {"User not found"})
+        val stmt = connection.prepareStatement("SELECT xuid, money FROM user WHERE name = ?")
         stmt.setString(1, name)
         val result = stmt.executeQuery()
         val xuid = result.getString("xuid")
@@ -46,8 +46,8 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
 
     override fun updateUser(user: User) {
         val xuid = user.xuid
-        require(this.existsUserId(xuid), {"User not found"})
-        val stmt = this.connection.prepareStatement("UPDATE user SET name = ?, money = ? WHERE xuid = ?")
+        require(existsUserId(xuid), {"User not found"})
+        val stmt = connection.prepareStatement("UPDATE user SET name = ?, money = ? WHERE xuid = ?")
         stmt.setString(1, user.name)
         stmt.setInt(2, user.money)
         stmt.setString(3, xuid)
@@ -55,14 +55,14 @@ class SQLiteUserRepository(connection: Connection) : UserRepository {
     }
 
     override fun existsUserId(xuid: String): Boolean {
-        val stmt = this.connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE xuid = ?")
+        val stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE xuid = ?")
         stmt.setString(1, xuid)
         val result = stmt.executeQuery()
         return result.getInt("count") == 1
     }
 
     override fun existsUserName(name: String): Boolean {
-        val stmt = this.connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE name = ?")
+        val stmt = connection.prepareStatement("SELECT COUNT(*) AS count FROM user WHERE name = ?")
         stmt.setString(1, name)
         val result = stmt.executeQuery()
         return result.getInt("count") == 1
