@@ -3,6 +3,7 @@ package net.bbo51dog.ecokkit
 import cn.nukkit.utils.Config
 import cn.nukkit.utils.ConfigSection
 import cn.nukkit.plugin.PluginBase
+import java.io.File
 import net.bbo51dog.ecokkit.api.EcokkitAPI
 import net.bbo51dog.ecokkit.command.MoneyCommand
 import net.bbo51dog.ecokkit.command.OpMoneyCommand
@@ -18,14 +19,16 @@ class EcokkitPlugin : PluginBase() {
     private lateinit var repo: UserRepository
 
     private lateinit var api: EcokkitAPI
+    
+    private lateinit var conf: Config
 
     override fun onLoad() {
         dataFolder.mkdir()
-        val config = loadConfig()
+        loadConfig()
         val lang = loadLanguage()
         provider = RepositoryProvider(dataFolder.absolutePath + "/ecokkit.db")
         repo = provider.createUserRepository()
-        EcokkitAPI.createInstance(repo, lang, config.getString("unit"), config.getInt("default_money"))
+        EcokkitAPI.createInstance(repo, lang, conf.getString("unit"), conf.getInt("default_money"))
     }
     
     override fun onEnable() {
@@ -37,34 +40,29 @@ class EcokkitPlugin : PluginBase() {
         provider.close()
     }
     
-    private fun loadConfig(): Config {
+    private fun loadConfig() {
         val section = ConfigSection()
         section.set("default_money", 5000)
         section.set("unit", "\$")
-        return Config(dataFolder.absolutePath + "/Cofig.yml", Config.YAML, section)
+        section.set("lang_default", "eng")
+        section.set("lang_list", listOf(
+            "eng",
+            "jpn"
+        ))
+        conf = Config(dataFolder.absolutePath + "/Cofig.yml", Config.YAML, section)
     }
     
     private fun loadLanguage(): Language {
-        val section = ConfigSection(linkedMapOf<String, Any>(
-            "prefix" to "§l§a[§6Ecokkit§a]§r ",
-            "sender.not.player" to "§cゲーム内で実行してください",
-            "player.not.found" to "プレイヤー｢%player｣が見つかりませんでした",
-            "invalid.value" to "不正な値です",
-            "command.usage" to "使い方: %usage",
-            "command.mine" to "あなたの所持金 §e>> §r%unit%money",
-            "command.see" to "%playerの所持金 §e>> §r%unit%money",
-            "command.pay.lacking" to "所持金が不足しています",
-            "command.pay.success.sender" to "%playerに%unit%money支払いました",
-            "command.pay.success.target" to "%playerから%unit%money受け取りました",
-            "command.set.success.sender" to "%playerの所持金を%unit%moneyに設定しました",
-            "command.set.success.target" to "%playerがあなたの所持金を%unit%moneyに設定しました",
-            "command.add.success.sender" to "%playerの所持金を%unit%money増やしました",
-            "command.add.success.target" to "%playerがあなたの所持金を%unit%money増やしました",
-            "command.reduce.success.sender" to "%playerの所持金を%unit%money減らしました",
-            "command.reduce.success.target" to "%playerがあなたの所持金を%unit%money減らしました"
-        ))
-        val config = Config(dataFolder.absolutePath + "/Language.ini", Config.PROPERTIES, section)
-        return Language(config.all)
+        val langs = mutableMapOf<String, Map<String, Any>>()
+        conf.getStringList("lang_list").forEach {
+            saveResource(it + ".ini")
+            var path = dataFolder.absolutePath + "/${it}.ini"
+            if (File(path).exists()) {
+                var data: Map<String, Any> = Config(path, Config.PROPERTIES).all
+                langs.set(it, data)
+            }
+        }
+        return Language(langs, conf.getString("lang_default"))
     }
 
     private fun registerCommand() {
