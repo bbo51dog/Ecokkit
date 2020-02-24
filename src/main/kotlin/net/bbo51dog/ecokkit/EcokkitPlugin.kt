@@ -49,7 +49,7 @@ class EcokkitPlugin : PluginBase() {
             "eng",
             "jpn"
         ))
-        conf = Config(dataFolder.absolutePath + "/Cofig.yml", Config.YAML, section)
+        conf = Config(dataFolder.absolutePath + "/Config.yml", Config.YAML, section)
     }
     
     private fun loadLanguage(): Language {
