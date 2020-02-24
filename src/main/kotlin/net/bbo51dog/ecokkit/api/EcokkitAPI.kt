@@ -27,42 +27,42 @@ class EcokkitAPI private constructor(repo: UserRepository, lang: Language, unit:
         @JvmStatic
         fun createInstance(repo: UserRepository, lang: Language, unit: String, default: Int) {
             if (!::instance.isInitialized) {
-                this.instance = EcokkitAPI(repo, lang, unit, default)
+                instance = EcokkitAPI(repo, lang, unit, default)
             }
         }
     }
 
     override fun getMoney(xuid: String): Int {
-        return this.repo.getUser(xuid).money
+        return repo.getUser(xuid).money
     }
 
     override fun setMoney(xuid: String, money: Int) {
         require(money >= 0, {"Money must be 0 or more"})
-        val user = this.repo.getUser(xuid)
+        val user = repo.getUser(xuid)
         val event = EcokkitSetMoneyEvent(xuid, user.name, money)
         Server.getInstance().pluginManager.callEvent(event)
         if (event.isCancelled()) {
             return
         }
         user.money = money
-        this.repo.updateUser(user)
+        repo.updateUser(user)
     }
 
     override fun addMoney(xuid: String, money: Int) {
         require(money > 0, {"Money must be over 0"})
-        val user = this.repo.getUser(xuid)
+        val user = repo.getUser(xuid)
         val event = EcokkitAddMoneyEvent(xuid, user.name, money)
         Server.getInstance().pluginManager.callEvent(event)
         if (event.isCancelled()) {
             return
         }
         user.money += money
-        this.repo.updateUser(user)
+        repo.updateUser(user)
     }
 
     override fun reduceMoney(xuid: String, money: Int) {
         require(money > 0, {"Money must be over 0"})
-        val user = this.repo.getUser(xuid)
+        val user = repo.getUser(xuid)
         val new = user.money + money
         require(new > 0, {"Money is too little"})
         val event = EcokkitReduceMoneyEvent(xuid, user.name, money)
@@ -71,44 +71,44 @@ class EcokkitAPI private constructor(repo: UserRepository, lang: Language, unit:
             return
         }
         user.money = new
-        this.repo.updateUser(user)
+        repo.updateUser(user)
     }
     
     override fun exists(xuid: String): Boolean {
-        return this.repo.existsUserId(xuid)
+        return repo.existsUserId(xuid)
     }
 
     override fun getMoneyByName(name: String): Int {
-        return this.repo.getUserByName(name).money
+        return repo.getUserByName(name).money
     }
 
     override fun setMoneyByName(name: String, money: Int) {
         require(money >= 0, {"Money must be 0 or more"})
-        val user = this.repo.getUserByName(name)
+        val user = repo.getUserByName(name)
         val event = EcokkitSetMoneyEvent(user.xuid, name, money)
         Server.getInstance().pluginManager.callEvent(event)
         if (event.isCancelled()) {
             return
         }
         user.money = money
-        this.repo.updateUser(user)
+        repo.updateUser(user)
     }
 
     override fun addMoneyByName(name: String, money: Int) {
         require(money > 0, {"Money must be over 0"})
-        val user = this.repo.getUserByName(name)
+        val user = repo.getUserByName(name)
         val event = EcokkitAddMoneyEvent(user.xuid, name, money)
         Server.getInstance().pluginManager.callEvent(event)
         if (event.isCancelled()) {
             return
         }
         user.money += money
-        this.repo.updateUser(user)
+        repo.updateUser(user)
     }
 
     override fun reduceMoneyByName(name: String, money: Int) {
         require(money > 0, {"Money must be over 0"})
-        val user = this.repo.getUserByName(name)
+        val user = repo.getUserByName(name)
         val new = user.money + money
         require(new > 0, {"Money is too little"})
         val event = EcokkitReduceMoneyEvent(user.xuid, name, money)
@@ -117,19 +117,19 @@ class EcokkitAPI private constructor(repo: UserRepository, lang: Language, unit:
             return
         }
         user.money = new
-        this.repo.updateUser(user)
+        repo.updateUser(user)
     }
     
     override fun existsByName(name: String): Boolean {
-        return this.repo.existsUserName(name)
+        return repo.existsUserName(name)
     }
 
     override fun createMoneyData(xuid: String, name: String) {
-        val user = UserFactory.createUser(xuid, name, this.default)
-        this.repo.registerUser(user)
+        val user = UserFactory.createUser(xuid, name, default)
+        repo.registerUser(user)
     }
     
     override fun getAll(): MutableMap<String, Map<String, Any>> {
-        return this.repo.getAllData()
+        return repo.getAllData()
     }
 }

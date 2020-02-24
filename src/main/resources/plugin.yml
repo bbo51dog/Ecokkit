@@ -1,6 +1,6 @@
 name: Ecokkit
 main: net.bbo51dog.ecokkit.EcokkitPlugin
-version: "1.0.0"
+version: "1.0.1"
 api: ["1.0.9"]
 author: bbo51dog
 description: Economy plugin for Nukkit
