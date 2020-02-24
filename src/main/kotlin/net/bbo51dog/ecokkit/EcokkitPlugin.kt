@@ -59,7 +59,7 @@ class EcokkitPlugin : PluginBase() {
             var path = dataFolder.absolutePath + "/${it}.ini"
             if (File(path).exists()) {
                 var data: Map<String, Any> = Config(path, Config.PROPERTIES).all
-                langs.set(it, data)
+                langs.put(it, data)
             }
         }
         return Language(langs, conf.getString("lang_default"))
